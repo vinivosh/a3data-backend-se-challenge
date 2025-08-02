@@ -1,7 +1,7 @@
 [project]
 name = "nuvie-backend"
 version = "0.1.0"
-description = "Add your description here"
+description = "Back-end for Nuvie's project. Exposes an API for handling and managing synthetic data."
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = []

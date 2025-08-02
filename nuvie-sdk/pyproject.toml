@@ -1,7 +1,7 @@
 [project]
 name = "nuvie-sdk"
 version = "0.1.0"
-description = "Add your description here"
+description = "SDK for Nuvie's project. Contains data models and use cases for interecting with Nuvie's DB. To be used by any other project in the eco-system. Follows semantic versioning."
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = []

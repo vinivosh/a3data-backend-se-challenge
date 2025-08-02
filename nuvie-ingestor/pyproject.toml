@@ -1,7 +1,7 @@
 [project]
 name = "nuvie-ingestor"
 version = "0.1.0"
-description = "Add your description here"
+description = "Ingestor for Nuvie's project. Imports medical and patient data from external sources (i.e. Synthea)"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = []
