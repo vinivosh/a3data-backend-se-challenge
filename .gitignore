@@ -2,8 +2,9 @@
 # ? Project specific
 # ? ############################################################################
 
-.env*
 ~*
+.env*
+!.env-sample
 
 
 # Created by https://www.toptal.com/developers/gitignore/api/python,visualstudiocode,git
