@@ -1,9 +1,22 @@
 services:
   nuvie-backend:
-    build: ./nuvie-backend
+    depends_on:
+        - postgres
+    networks:
+      - vini-nuvie
 
+    environment:
+      - ENV_FILE=".env"
     ports:
-      - "8000:8000"
+      - "${BACKEND_PORT-8000}:${BACKEND_PORT-8000}"
+
+    build:
+      context: ./nuvie-backend
+
+    platform: linux/amd64 # Patch for M1 Mac
+
+    volumes:
+      - ./nuvie-backend:/app
 
     develop:
       # For hot reloading during development
@@ -18,3 +31,29 @@ services:
         # Rebuild if dependencies change
         - action: rebuild
           path: ./nuvie-backend/uv.lock
+
+  postgres:
+    image: postgres:17.5-alpine
+    networks:
+      - vini-nuvie
+    env_file:
+      # Environment variables for postgres user and password must
+      # be set in the .env file!
+      - .env
+    ports:
+      - "${POSTGRES_PORT-5432}:${POSTGRES_PORT-5432}"
+    environment:
+      POSTGRES_HOST_AUTH_METHOD: 'trust'
+      SERVICE_MANAGER: 'fsm-postgres'
+    volumes:
+      - 'nuvie-database:/var/lib/postgresql/data/'
+
+
+volumes:
+  nuvie-database:
+
+
+networks:
+  vini-nuvie:
+    name: vini-nuvie
+    driver: bridge
