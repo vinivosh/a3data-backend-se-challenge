@@ -1,0 +1,20 @@
+services:
+  nuvie-backend:
+    build: ./nuvie-backend
+
+    ports:
+      - "8000:8000"
+
+    develop:
+      # For hot reloading during development
+      watch:
+        # Sync the working directory with the `/app` directory in the container
+        - action: sync
+          path: ./nuvie-backend
+          target: /app
+          ignore:
+            - .venv/
+
+        # Rebuild if dependencies change
+        - action: rebuild
+          path: ./nuvie-backend/uv.lock
