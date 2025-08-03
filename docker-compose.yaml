@@ -4,9 +4,8 @@ services:
         - postgres
     networks:
       - vini-nuvie
-
-    environment:
-      - ENV_FILE=".env"
+    env_file:
+      - .env
     ports:
       - "${BACKEND_PORT-8000}:${BACKEND_PORT-8000}"
 
@@ -37,8 +36,8 @@ services:
     networks:
       - vini-nuvie
     env_file:
-      # Environment variables for postgres user and password must
-      # be set in the .env file!
+      # Environment variables for postgres user and password must be set in the
+      # .env file!
       - .env
     ports:
       - "${POSTGRES_PORT-5432}:${POSTGRES_PORT-5432}"
