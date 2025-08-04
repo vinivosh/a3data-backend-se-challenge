@@ -2,15 +2,19 @@
 # Build stage
 ################################################################################
 
-FROM ghcr.io/astral-sh/uv:0.8.4-python3.12-alpine AS build
-
+FROM ghcr.io/astral-sh/uv:bookworm-slim AS build
 ENV UV_COMPILE_BYTECODE=1 UV_LINK_MODE=copy
 
-# This is necessary to use the system Python interpreter insted of a managed
-# version
-ENV UV_PYTHON_DOWNLOADS=0
+ENV UV_PYTHON_INSTALL_DIR=/python
+ENV UV_PYTHON_PREFERENCE=only-managed
 
 WORKDIR /app
+
+COPY .python-version .python-version
+
+# Install Python before the project for caching
+RUN uv python install
+
 RUN --mount=type=cache,target=/root/.cache/uv \
     --mount=type=bind,source=uv.lock,target=uv.lock \
     --mount=type=bind,source=pyproject.toml,target=pyproject.toml \
@@ -23,13 +27,42 @@ RUN --mount=type=cache,target=/root/.cache/uv \
 # Application stage (without uv)
 ################################################################################
 
-FROM python:3.12-alpine
+FROM debian:bookworm-slim
 
-# Copy the application from the build
+# Install runtime dependencies
+RUN apt-get update && apt-get install -y \
+    --no-install-recommends \
+    ca-certificates \
+    && rm -rf /var/lib/apt/lists/*
+
+# Create app user
+RUN groupadd --gid 1000 app && useradd --uid 1000 --gid app --shell /bin/bash --create-home app
+
+# Copy the Python installation from the build stage
+COPY --from=build /python /python
+
+# Copy the application from the build (including .venv)
 COPY --from=build --chown=app:app /app /app
 
-# Place executables in the environment at the front of the path
+# Make sure the Python directory is accessible to the app user
+RUN chmod -R 755 /python
+RUN chown -R app:app /python
+
+# Add the virtual environment to PATH
 ENV PATH="/app/.venv/bin:$PATH"
 
-# Run the FastAPI application
+USER app
+WORKDIR /app
+
+RUN ls -la /python
+RUN ls -la /python/cpython-3.12.11-linux-x86_64-gnu/bin
+RUN ls -la /app
+RUN ls -la /app/src
+RUN ls -la /app/.venv
+RUN ls -la /app/.venv/bin
+RUN which python || echo "Python not found in PATH"
+RUN which fastapi || echo "FastAPI not found in PATH"
+RUN echo $PATH || echo "PATH is not set correctly"
+
+# Run FastAPI application
 CMD ["fastapi", "dev", "--host", "0.0.0.0", "/app/src"]

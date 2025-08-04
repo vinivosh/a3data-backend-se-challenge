@@ -7,7 +7,7 @@ app = FastAPI()
 
 @app.get("/")
 def read_root():
-    return {"msg": "Olá, mundo!"}
+    return {"msg": "Olá, mundo! Bem-vindo ao Nuvie Backend!"}
 
 
 @app.get("/items/{item_id}")
