@@ -14,9 +14,6 @@ services:
 
     platform: linux/amd64 # Patch for M1 Mac
 
-    volumes:
-      - ./nuvie-backend:/app
-
     develop:
       # For hot reloading during development
       watch:
@@ -42,7 +39,7 @@ services:
     ports:
       - "${POSTGRES_PORT-5432}:${POSTGRES_PORT-5432}"
     environment:
-      POSTGRES_HOST_AUTH_METHOD: 'trust'
+      POSTGRES_HOST_AUTH_METHOD: 'password'
       SERVICE_MANAGER: 'fsm-postgres'
     volumes:
       - 'nuvie-database:/var/lib/postgresql/data/'
