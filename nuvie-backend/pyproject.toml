@@ -28,9 +28,7 @@ line-length = 79
 extend-select = [
     "E501", # line-too-long
     "UP",  # pyupgrade
-    "D",   # pydocstyle
 ]
-
-
-[tool.ruff.lint.pydocstyle]
-convention = "google"
+extend-ignore = [
+    "F403", # 'from module import *' used; unable to detect undefined names
+]
