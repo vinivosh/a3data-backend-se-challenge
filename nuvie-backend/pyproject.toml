@@ -10,9 +10,27 @@ dependencies = [
     "structlog>=25.4.0",
 ]
 
+
 [dependency-groups]
 dev = [
     "pytest>=8.4.1",
     "rich>=14.1.0",
     "ruff>=0.12.7",
 ]
+
+
+[tool.ruff]
+line-length = 79
+
+
+[tool.ruff.lint]
+# Adding rules to the enforced rule set.
+extend-select = [
+    "E501", # line-too-long
+    "UP",  # pyupgrade
+    "D",   # pydocstyle
+]
+
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"

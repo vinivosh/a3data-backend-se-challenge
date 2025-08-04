@@ -12,6 +12,7 @@ dependencies = [
     "python-dotenv>=1.1.1",
 ]
 
+
 [dependency-groups]
 dev = [
     "pytest>=8.4.1",
@@ -22,3 +23,20 @@ migrations = [
     "alembic>=1.16.4",
     "psycopg>=3.2.9",
 ]
+
+
+[tool.ruff]
+line-length = 79
+
+
+[tool.ruff.lint]
+# Adding rules to the enforced rule set.
+extend-select = [
+    "E501", # line-too-long
+    "UP",  # pyupgrade
+    "D",   # pydocstyle
+]
+
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
