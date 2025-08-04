@@ -17,6 +17,11 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/c2/62/96b5217b742805236614f05904541000f55422a6060a90d7fd4ce26c172d/alembic-1.16.4-py3-none-any.whl", hash = "sha256:b05e51e8e82efc1abd14ba2af6392897e145930c3e0a2faf2b0da2f7f7fd660d", size = 247026, upload-time = "2025-07-10T16:17:21.845Z" },
 ]
 
+[package.optional-dependencies]
+tz = [
+    { name = "tzdata" },
+]
+
 [[package]]
 name = "annotated-types"
 version = "0.7.0"
@@ -275,7 +280,7 @@ dev = [
     { name = "ruff" },
 ]
 migrations = [
-    { name = "alembic" },
+    { name = "alembic", extra = ["tz"] },
     { name = "psycopg" },
 ]
 
@@ -295,7 +300,7 @@ dev = [
     { name = "ruff", specifier = ">=0.12.7" },
 ]
 migrations = [
-    { name = "alembic", specifier = ">=1.16.4" },
+    { name = "alembic", extras = ["tz"], specifier = ">=1.16.4" },
     { name = "psycopg", specifier = ">=3.2.9" },
 ]
 

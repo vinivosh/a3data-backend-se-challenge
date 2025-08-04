@@ -20,7 +20,7 @@ dev = [
     "ruff>=0.12.7",
 ]
 migrations = [
-    "alembic>=1.16.4",
+    "alembic[tz]>=1.16.4",
     "psycopg>=3.2.9",
 ]
 
