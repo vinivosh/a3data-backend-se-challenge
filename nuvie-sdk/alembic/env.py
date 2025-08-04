@@ -50,8 +50,8 @@ ENV_FILE = os.getenv("ENV_FILE", ".env")
 loaded_env_vars = dotenv.load_dotenv(ENV_FILE)
 
 print(f'Alembic | Loaded env vars from "{ENV_FILE}"? {loaded_env_vars}')
-print(f"Alembic | POSTGRES_SERVER={os.getenv('POSTGRES_SERVER', '')}")
-print(f"Alembic | POSTGRES_PORT={os.getenv('POSTGRES_PORT', '')}")
+print(f"Alembic | POSTGRES_SERVER={c.POSTGRES_SERVER}")
+print(f"Alembic | POSTGRES_PORT={c.POSTGRES_PORT}")
 
 
 def run_migrations_offline() -> None:
