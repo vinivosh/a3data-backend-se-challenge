@@ -5,11 +5,11 @@ description = "SDK for Nuvie's project. Contains data models and use cases for i
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
+    "sqlmodel>=0.0.24",
     "bcrypt>=4.3.0",
     "passlib[bcrypt]>=1.7.4",
     "pyjwt>=2.10.1",
     "python-dotenv>=1.1.1",
-    "sqlmodel>=0.0.24",
 ]
 
 [dependency-groups]
