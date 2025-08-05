@@ -8,8 +8,6 @@ services:
       - .env
     ports:
       - "${BACKEND_PORT-8000}:${BACKEND_PORT-8000}"
-    # volumes:
-    #   - ./nuvie-sdk:/nuvie-sdk
 
     build:
       context: ./nuvie-backend

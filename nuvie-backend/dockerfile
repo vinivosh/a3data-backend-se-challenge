@@ -15,10 +15,6 @@ COPY --from=nuvie-sdk . /nuvie-sdk
 
 COPY .python-version .python-version
 
-RUN ls -la /app
-RUN ls -la /
-RUN ls -la /nuvie-sdk || echo "nuvie-sdk not found in root directory"
-
 # Install Python before the project for caching
 RUN uv python install
 
@@ -63,18 +59,6 @@ ENV PATH="/app/.venv/bin:$PATH"
 
 USER app
 WORKDIR /app
-
-RUN ls -la /
-RUN ls -la /nuvie-sdk
-RUN ls -la /python
-RUN ls -la /python/cpython-3.12.11-linux-x86_64-gnu/bin
-RUN ls -la /app
-RUN ls -la /app/src
-RUN ls -la /app/.venv
-RUN ls -la /app/.venv/bin
-RUN which python || echo "Python not found in PATH"
-RUN which fastapi || echo "FastAPI not found in PATH"
-RUN echo $PATH || echo "PATH is not set correctly"
 
 # Run FastAPI application
 CMD ["fastapi", "dev", "--host", "0.0.0.0", "/app/src"]
