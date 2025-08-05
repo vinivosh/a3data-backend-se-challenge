@@ -57,6 +57,10 @@ RUN chown -R app:app /python
 # Add the virtual environment to PATH
 ENV PATH="/app/.venv/bin:$PATH"
 
+# Add /app to PYTHONPATH. This allows the application to correctly import modules
+# from the /app/src directory directly
+ENV PYTHONPATH="/app/src:$PYTHONPATH"
+
 USER app
 WORKDIR /app
 

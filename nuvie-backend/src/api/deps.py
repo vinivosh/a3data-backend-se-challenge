@@ -8,11 +8,11 @@ from jwt.exceptions import InvalidTokenError
 from pydantic import ValidationError
 from sqlmodel import Session
 
-import src.constants as c
-
-from src import auth
-from src.db import engine
 from nuvie_sdk.models import TokenPayload, User
+
+import constants as c
+import auth
+from db import engine
 
 reusable_oauth2 = OAuth2PasswordBearer(
     tokenUrl=f"{c.API_V1_STR}/login/access-token"

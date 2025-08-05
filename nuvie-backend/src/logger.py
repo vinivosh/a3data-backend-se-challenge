@@ -2,7 +2,7 @@ import logging
 
 import structlog
 
-import src.constants as c
+import constants as c
 
 
 if c.LOG_LEVEL in [

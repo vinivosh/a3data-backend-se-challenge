@@ -1,7 +1,7 @@
 from sqlmodel import Session, create_engine, select
 
-from src.logger import log
-import src.constants as c
+from logger import log
+import constants as c
 
 from nuvie_sdk.models import User, UserCreate
 

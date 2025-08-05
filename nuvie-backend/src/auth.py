@@ -11,7 +11,7 @@ import jwt
 from fastapi import Response
 from passlib.context import CryptContext
 
-import src.constants as c
+import constants as c
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
