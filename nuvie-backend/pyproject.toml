@@ -35,5 +35,9 @@ extend-ignore = [
     "F403", # 'from module import *' used; unable to detect undefined names
 ]
 
+# Needed so that pyright can find the nuvie-sdk package
+[tool.pyright]
+extraPaths = ["../nuvie-sdk"]
+
 [tool.uv.sources]
 nuvie-sdk = { path = "../nuvie-sdk", editable = true }
