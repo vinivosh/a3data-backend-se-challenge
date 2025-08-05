@@ -17,7 +17,7 @@ LOG_LEVEL = os.environ.get("LOG_LEVEL", "INFO").upper()
 POSTGRES_SERVER = os.getenv("POSTGRES_SERVER", "postgres")
 POSTGRES_PORT = os.getenv("POSTGRES_PORT", "5432")
 
-POSTGRES_DB = os.getenv("POSTGRES_DB", "payfy-pkmn")
+POSTGRES_DB = os.getenv("POSTGRES_DB", "nuvie")
 POSTGRES_USER = os.getenv("POSTGRES_USER", "postgres")
 POSTGRES_PASSWORD = os.getenv("POSTGRES_PASSWORD", "")
 

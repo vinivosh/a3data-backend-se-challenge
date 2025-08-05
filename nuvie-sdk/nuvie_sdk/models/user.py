@@ -6,7 +6,7 @@ from pydantic import EmailStr
 
 # from datetime import datetime
 
-import constants as c
+from .. import constants as c
 
 
 class UserBase(SQLModel):

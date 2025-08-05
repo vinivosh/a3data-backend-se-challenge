@@ -1,6 +1,6 @@
 """This file contains the models used in the Nuvie SDK."""
 
-from models.user import *
+from .user import *
 
 from sqlmodel import Field, SQLModel
 
