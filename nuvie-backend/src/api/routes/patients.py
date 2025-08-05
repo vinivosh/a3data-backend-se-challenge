@@ -35,10 +35,8 @@ def read_patients(
     )
 
     # Convert Patient models to PatientPublic
-    patients_public = [
-        PatientPublic.model_validate(patient) for patient in patients
-    ]
-    return PatientsPublic(data=patients_public, count=count)
+    patients = [PatientPublic.model_validate(patient) for patient in patients]
+    return PatientsPublic(data=patients, count=count)
 
 
 @router.post(
@@ -61,6 +59,15 @@ def create_patient(
         raise HTTPException(
             status_code=400,
             detail="A patient with this SSN already exists in the system.",
+        )
+
+    # Check if patient with this ID already exists, if needed
+    if patient_in.id and patient_use_case.get_patient_by_id(
+        session=session, patient_id=patient_in.id
+    ):
+        raise HTTPException(
+            status_code=400,
+            detail="A patient with this ID already exists in the system.",
         )
 
     patient = patient_use_case.create_patient(
