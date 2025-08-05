@@ -11,8 +11,13 @@ from sqlalchemy import engine_from_config
 from sqlalchemy import pool
 from alembic import context
 
-import constants as c
-from models import SQLModel  # noqa
+import sys
+
+# Add the parent directory (nuvie-sdk root) to the Python path
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
+
+import nuvie_sdk.constants as c
+from nuvie_sdk.models import SQLModel
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
