@@ -40,7 +40,7 @@ def read_users(
     statement = select(User).offset(skip).limit(limit)
     users = session.exec(statement).all()
 
-    return UsersPublic(data=users, count=count)
+    return UsersPublic(data=users, count=count)  # type: ignore
 
 
 @router.post(
@@ -59,7 +59,7 @@ def create_user(
     if user:
         raise HTTPException(
             status_code=400,
-            detail="The user with this email already exists in the system.",
+            detail="A user with this email already exists in the system.",
         )
 
     user = user_use_case.create_user(session=session, user_create=user_in)
