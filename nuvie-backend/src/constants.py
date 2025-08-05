@@ -32,7 +32,9 @@ else:
     try:
         WORKERS = int(WORKERS)
     except ValueError:
-        raise ValueError("Environment variable WORKERS must be a valid integer")
+        raise ValueError(
+            "Environment variable WORKERS must be a valid integer"
+        )
 
 LOG_LEVEL = os.environ.get("LOG_LEVEL", "INFO").upper()
 
@@ -57,7 +59,9 @@ def get_postgres_uri():
 # * First super user credentials
 # * ###########################################################################
 
-FIRST_SUPERUSER_EMAIL = os.getenv("FIRST_SUPERUSER_EMAIL", "vinicius7427@gmail.com")
+FIRST_SUPERUSER_EMAIL = os.getenv(
+    "FIRST_SUPERUSER_EMAIL", "vinicius7427@gmail.com"
+)
 FIRST_SUPERUSER_PASSWORD = os.getenv("FIRST_SUPERUSER_PASSWORD", "12345678")
 FIRST_SUPERUSER_FULL_NAME = os.getenv(
     "FIRST_SUPERUSER_FULL_NAME", "Vinícius H. A. Praxedes"

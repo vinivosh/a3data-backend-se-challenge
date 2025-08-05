@@ -1,13 +1,13 @@
 from fastapi import FastAPI
 
-import nuvie_sdk as nuv
+import nuvie_sdk as nuv  # pyright: ignore[reportMissingImports]
+
 
 app = FastAPI()
 
 
 @app.get("/")
 def read_root():
-    print("Nuvie Backend is running! Imported nuvie_sdk:", nuv)
     return {"msg": "Olá, mundo! Bem-vindo ao Nuvie Backend!"}
 
 
