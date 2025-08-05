@@ -11,6 +11,15 @@ LOG_LEVEL = os.environ.get("LOG_LEVEL", "INFO").upper()
 
 
 # * ###########################################################################
+# * Authentication related
+# * ###########################################################################
+
+# Only used as a default value. Functions that use it handle the case where it
+# is not set, throwing a ValueError.
+SECRET_KEY = os.getenv("SECRET_KEY", None)
+
+
+# * ###########################################################################
 # * DB credentials
 # * ###########################################################################
 

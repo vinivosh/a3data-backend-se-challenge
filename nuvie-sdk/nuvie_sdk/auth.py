@@ -1,10 +1,12 @@
 """
+Authentication module.
+
 This module handles authentication-related functionalities such as creating JWT
 tokens, setting cookies, and verifying passwords.
 """
 
 from typing import Any
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, UTC
 
 import jwt
 
@@ -19,12 +21,21 @@ pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 ALGORITHM = "HS256"
 
 
-def create_access_token(subject: str | Any, expires_delta: timedelta) -> str:
+def create_access_token(
+    subject: str | Any, expires_delta: timedelta, secret_key: str | None = None
+) -> str:
     """Creates a JWT access token with an expiration time."""
 
-    expire = datetime.utcnow() + expires_delta
+    if secret_key is None:
+        secret_key = c.SECRET_KEY
+    if secret_key is None:
+        raise ValueError(
+            "`secret_key` argument was not provided and environment variable SECRET_KEY is not set!"
+        )
+
+    expire = datetime.now(UTC) + expires_delta
     to_encode = {"exp": expire, "sub": str(subject)}
-    encoded_jwt = jwt.encode(to_encode, c.SECRET_KEY, algorithm=ALGORITHM)
+    encoded_jwt = jwt.encode(to_encode, secret_key, algorithm=ALGORITHM)
     return encoded_jwt
 
 
