@@ -6,6 +6,7 @@ readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
     "fastapi[standard]>=0.116.1",
+    "nuvie-sdk",
     "python-dotenv>=1.1.1",
     "structlog>=25.4.0",
 ]
@@ -17,6 +18,7 @@ dev = [
     "rich>=14.1.0",
     "ruff>=0.12.7",
 ]
+migrations = []
 
 
 [tool.ruff]
@@ -32,3 +34,6 @@ extend-select = [
 extend-ignore = [
     "F403", # 'from module import *' used; unable to detect undefined names
 ]
+
+[tool.uv.sources]
+nuvie-sdk = { path = "../nuvie-sdk", editable = true }
