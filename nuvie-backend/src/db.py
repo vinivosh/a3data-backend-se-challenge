@@ -1,11 +1,10 @@
 from sqlmodel import Session, create_engine, select
 
-from logger import log
-import constants as c
-
-from nuvie_sdk.models import *
 from nuvie_sdk.models import User, UserCreate
 from nuvie_sdk.use_cases import user_use_case
+
+from logger import log
+import constants as c
 
 
 engine = create_engine(str(c.get_postgres_uri()))

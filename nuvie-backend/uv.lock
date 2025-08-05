@@ -448,7 +448,6 @@ dev = [
     { name = "rich", specifier = ">=14.1.0" },
     { name = "ruff", specifier = ">=0.12.7" },
 ]
-migrations = []
 
 [[package]]
 name = "nuvie-sdk"
