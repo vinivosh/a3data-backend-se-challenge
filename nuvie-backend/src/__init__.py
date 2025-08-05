@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 
-import nuvie_sdk as nuv  # pyright: ignore[reportMissingImports]
+import nuvie_sdk as nuv
 
 
 app = FastAPI()
