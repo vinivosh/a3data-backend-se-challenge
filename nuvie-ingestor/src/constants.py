@@ -48,7 +48,7 @@ def get_postgres_uri():
 
 SYNTHEA_URL = os.getenv(
     "SYNTHEA_URL",
-    "https://mitre.box.com/shared/static/aw9po06ypfb9hrau4jamtvtz0e5ziucz.zip",
+    "https://synthetichealth.github.io/synthea-sample-data/downloads/synthea_sample_data_csv_apr2020.zip",
 )
 SYNTHEA_ZIP_NAME = os.getenv(
     "SYNTHEA_ZIP_NAME", "synthea_sample_data_csv_nov2021.zip"
