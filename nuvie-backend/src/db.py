@@ -3,6 +3,7 @@ from sqlmodel import Session, create_engine, select
 from logger import log
 import constants as c
 
+from nuvie_sdk.models import *
 from nuvie_sdk.models import User, UserCreate
 from nuvie_sdk.use_cases import user_use_case
 
@@ -10,9 +11,9 @@ from nuvie_sdk.use_cases import user_use_case
 engine = create_engine(str(c.get_postgres_uri()))
 
 
-# make sure all SQLModel models are imported (app.models) before initializing
-# DB otherwise, SQLModel might fail to initialize relationships properly for
-# more details:
+# make sure all SQLModel models are imported (nuvie_sdk.models) before
+# initializing DB otherwise, SQLModel might fail to initialize relationships
+# properly for more details:
 #
 # https://github.com/tiangolo/full-stack-fastapi-template/issues/28
 
