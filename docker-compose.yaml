@@ -8,8 +8,8 @@ services:
       - .env
     ports:
       - "${BACKEND_PORT-8000}:${BACKEND_PORT-8000}"
-    volumes:
-      - ./nuvie-sdk:/nuvie-sdk
+    # volumes:
+    #   - ./nuvie-sdk:/nuvie-sdk
 
     build:
       context: ./nuvie-backend
@@ -28,7 +28,7 @@ services:
           ignore:
             - .venv/
 
-        # Sync the nuvie-sdk directory with the `/app` directory in the container
+        # Sync the nuvie-sdk directory with the `/nuvie-sdk` directory in the container
         - action: sync
           path: ./nuvie-sdk
           target: /nuvie-sdk
