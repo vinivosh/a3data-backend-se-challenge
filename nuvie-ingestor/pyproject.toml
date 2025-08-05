@@ -4,4 +4,40 @@ version = "0.1.0"
 description = "Ingestor for Nuvie's project. Imports medical and patient data from external sources (i.e. Synthea)"
 readme = "README.md"
 requires-python = ">=3.12"
-dependencies = []
+dependencies = [
+    "nuvie-sdk",
+    "psycopg-binary>=3.2.9",
+    "python-dotenv>=1.1.1",
+    "structlog>=25.4.0",
+    "httpx>=0.27.0",
+]
+
+
+[dependency-groups]
+dev = [
+    "pytest>=8.4.1",
+    "rich>=14.1.0",
+    "ruff>=0.12.7",
+]
+
+
+[tool.ruff]
+line-length = 79
+
+
+[tool.ruff.lint]
+# Adding rules to the enforced rule set.
+extend-select = [
+    "E501", # line-too-long
+    "UP",  # pyupgrade
+]
+extend-ignore = [
+    "F403", # 'from module import *' used; unable to detect undefined names
+]
+
+# Needed so that pyright can find the nuvie-sdk package
+[tool.pyright]
+extraPaths = ["../nuvie-sdk"]
+
+[tool.uv.sources]
+nuvie-sdk = { path = "../nuvie-sdk", editable = true }
