@@ -11,7 +11,7 @@ from sqlmodel import Session
 from nuvie_sdk.models import TokenPayload, User
 
 import constants as c
-import auth
+import nuvie_sdk.auth as auth
 from db import engine
 
 reusable_oauth2 = OAuth2PasswordBearer(
