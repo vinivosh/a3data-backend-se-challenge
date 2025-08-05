@@ -8,9 +8,13 @@ services:
       - .env
     ports:
       - "${BACKEND_PORT-8000}:${BACKEND_PORT-8000}"
+    volumes:
+      - ./nuvie-sdk:/nuvie-sdk
 
     build:
       context: ./nuvie-backend
+      additional_contexts:
+        nuvie-sdk: ./nuvie-sdk
 
     platform: linux/amd64 # Patch for M1 Mac
 
@@ -24,9 +28,18 @@ services:
           ignore:
             - .venv/
 
+        # Sync the nuvie-sdk directory with the `/app` directory in the container
+        - action: sync
+          path: ./nuvie-sdk
+          target: /nuvie-sdk
+          ignore:
+            - .venv/
+
         # Rebuild if dependencies change
         - action: rebuild
           path: ./nuvie-backend/uv.lock
+        - action: rebuild
+          path: ./nuvie-sdk/uv.lock
 
   postgres:
     image: postgres:17.5-alpine

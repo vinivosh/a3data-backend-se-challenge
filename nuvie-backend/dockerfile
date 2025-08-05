@@ -10,7 +10,14 @@ ENV UV_PYTHON_PREFERENCE=only-managed
 
 WORKDIR /app
 
+# Copy nuvie-sdk from additional context to make it available for dependency resolution
+COPY --from=nuvie-sdk . /nuvie-sdk
+
 COPY .python-version .python-version
+
+RUN ls -la /app
+RUN ls -la /
+RUN ls -la /nuvie-sdk || echo "nuvie-sdk not found in root directory"
 
 # Install Python before the project for caching
 RUN uv python install
@@ -44,6 +51,9 @@ COPY --from=build /python /python
 # Copy the application from the build (including .venv)
 COPY --from=build --chown=app:app /app /app
 
+# Copy the nuvie-sdk from the build stage
+COPY --from=build --chown=app:app /nuvie-sdk /nuvie-sdk
+
 # Make sure the Python directory is accessible to the app user
 RUN chmod -R 755 /python
 RUN chown -R app:app /python
@@ -54,6 +64,8 @@ ENV PATH="/app/.venv/bin:$PATH"
 USER app
 WORKDIR /app
 
+RUN ls -la /
+RUN ls -la /nuvie-sdk
 RUN ls -la /python
 RUN ls -la /python/cpython-3.12.11-linux-x86_64-gnu/bin
 RUN ls -la /app
