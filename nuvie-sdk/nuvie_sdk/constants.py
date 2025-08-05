@@ -42,3 +42,4 @@ def get_postgres_uri():
 # * ###########################################################################
 
 USER_TABLE_NAME: str = "users"
+PATIENT_TABLE_NAME: str = "patients"

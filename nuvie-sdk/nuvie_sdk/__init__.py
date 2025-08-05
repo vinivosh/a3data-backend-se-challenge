@@ -7,8 +7,8 @@ by any other project in the eco-system. Follows semantic versioning.
 
 __all__ = [
     "models",
-    # "use_cases",
+    "use_cases",
 ]
 
 from . import models
-# import .use_cases
+from . import use_cases
