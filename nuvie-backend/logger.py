@@ -1,5 +1,24 @@
 import logging
+
 import structlog
+
+import src.constants as c
+
+
+if c.LOG_LEVEL in [
+    "CRITICAL",
+    "FATAL",
+    "ERROR",
+    "WARN",
+    "WARNING",
+    "INFO",
+    "DEBUG",
+    "NOTSET",
+]:
+    _LOG_LEVEL = logging.getLevelName(c.LOG_LEVEL)
+else:
+    _LOG_LEVEL = logging.NOTSET
+
 
 structlog.configure(
     processors=[
@@ -10,9 +29,10 @@ structlog.configure(
         structlog.processors.TimeStamper(fmt="%Y-%m-%d %H:%M:%S", utc=False),
         structlog.dev.ConsoleRenderer(),
     ],
-    wrapper_class=structlog.make_filtering_bound_logger(logging.NOTSET),
+    wrapper_class=structlog.make_filtering_bound_logger(_LOG_LEVEL),
     context_class=dict,
     logger_factory=structlog.PrintLoggerFactory(),
     cache_logger_on_first_use=False,
 )
-log = structlog.get_logger()
+
+log: structlog.stdlib.BoundLogger = structlog.get_logger()
