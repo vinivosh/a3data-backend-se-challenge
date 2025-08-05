@@ -28,7 +28,8 @@ def create_access_token(
         secret_key = c.SECRET_KEY
     if secret_key is None:
         raise ValueError(
-            "`secret_key` argument was not provided and environment variable SECRET_KEY is not set!"
+            "`secret_key` argument was not provided and environment variable "
+            "SECRET_KEY is not set!"
         )
 
     expire = datetime.now(UTC) + expires_delta
@@ -42,8 +43,9 @@ def set_token_cookie(response: Any, token: str):
     Sets the JWT token in the response cookies.
 
     Args:
-        response: A response object that has a set_cookie method
-                 (e.g., FastAPI Response)
+        response: A response object that has a set_cookie method (e.g., FastAPI
+        Response)
+
         token: The JWT token to set in the cookie
     """
 
