@@ -9,8 +9,6 @@ from typing import Any
 from datetime import datetime, timedelta, UTC
 
 import jwt
-
-from fastapi import Response
 from passlib.context import CryptContext
 
 import constants as c
@@ -39,8 +37,15 @@ def create_access_token(
     return encoded_jwt
 
 
-def set_token_cookie(response: Response, token: str):
-    """Sets the JWT token in the response cookies."""
+def set_token_cookie(response: Any, token: str):
+    """
+    Sets the JWT token in the response cookies.
+
+    Args:
+        response: A response object that has a set_cookie method
+                 (e.g., FastAPI Response)
+        token: The JWT token to set in the cookie
+    """
 
     response.set_cookie(
         key="access_token",
