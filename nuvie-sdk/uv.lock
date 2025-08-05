@@ -310,8 +310,11 @@ name = "nuvie-sdk"
 version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
+    { name = "alembic", extra = ["tz"] },
+    { name = "alembic-postgresql-enum" },
     { name = "bcrypt" },
     { name = "passlib", extra = ["bcrypt"] },
+    { name = "psycopg" },
     { name = "pydantic", extra = ["email"] },
     { name = "pyjwt" },
     { name = "python-dotenv" },
@@ -324,16 +327,14 @@ dev = [
     { name = "rich" },
     { name = "ruff" },
 ]
-migrations = [
-    { name = "alembic", extra = ["tz"] },
-    { name = "alembic-postgresql-enum" },
-    { name = "psycopg" },
-]
 
 [package.metadata]
 requires-dist = [
+    { name = "alembic", extras = ["tz"], specifier = ">=1.16.4" },
+    { name = "alembic-postgresql-enum", specifier = ">=1.8.0" },
     { name = "bcrypt", specifier = ">=4.3.0" },
     { name = "passlib", extras = ["bcrypt"], specifier = ">=1.7.4" },
+    { name = "psycopg", specifier = ">=3.2.9" },
     { name = "pydantic", extras = ["email"], specifier = ">=2.11.7" },
     { name = "pyjwt", specifier = ">=2.10.1" },
     { name = "python-dotenv", specifier = ">=1.1.1" },
@@ -345,11 +346,6 @@ dev = [
     { name = "pytest", specifier = ">=8.4.1" },
     { name = "rich", specifier = ">=14.1.0" },
     { name = "ruff", specifier = ">=0.12.7" },
-]
-migrations = [
-    { name = "alembic", extras = ["tz"], specifier = ">=1.16.4" },
-    { name = "alembic-postgresql-enum", specifier = ">=1.8.0" },
-    { name = "psycopg", specifier = ">=3.2.9" },
 ]
 
 [[package]]
